@@ -30,7 +30,7 @@ function App() {
       setPash(false);
       localStorage.setItem('pash', JSON.stringify(false));
     }
-  }, [counter]);
+  }, [counter, pash, isNotFirst]);
 
   const clickCounter = () => {
     setCounter((counter) => counter + step);
