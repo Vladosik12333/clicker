@@ -27,35 +27,32 @@ function App() {
   };
 
   const buyFirstMouse = () => {
-    if (counter > 100) {
-      setCounter((counter) => counter - 100);
-      setStep((step) => step + 4);
-      localStorage.setItem('step', JSON.stringify(step));
-    }
+    if (!(counter > 100)) return;
+    setCounter((counter) => counter - 100);
+    setStep((step) => step + 4);
+    localStorage.setItem('step', JSON.stringify(step));
   };
 
   const buySecondMouse = () => {
-    if (counter < 3000) {
-      setCounter((counter) => counter - 3000);
-      setStep((step) => step * 2);
-      localStorage.setItem('step', JSON.stringify(step));
-    }
+    if (!(counter > 3000)) return;
+    setCounter((counter) => counter - 3000);
+    setStep((step) => step * 2);
+    localStorage.setItem('step', JSON.stringify(step));
   };
 
   const buyThirdMouse = () => {
-    if (counter < 10000) {
-      setCounter((counter) => counter - 10000);
-      setInterval(
-        () =>
-          setCounter((counter) => {
-            localStorage.setItem('click', JSON.stringify(counter + 10));
-            checkPash();
-            return counter + 10;
-          }),
-        1000
-      );
-      localStorage.setItem('step', JSON.stringify(step));
-    }
+    if (!(counter > 10000)) return;
+    setCounter((counter) => counter - 10000);
+    setInterval(
+      () =>
+        setCounter((counter) => {
+          localStorage.setItem('click', JSON.stringify(counter + 10));
+          checkPash();
+          return counter + 10;
+        }),
+      1000
+    );
+    localStorage.setItem('step', JSON.stringify(step));
   };
 
   const saveName = () => {
