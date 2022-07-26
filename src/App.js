@@ -6,8 +6,7 @@ function App() {
   const [counter, setCounter] = useState(0);
   const [step, setStep] = useState(1);
   const [name, setName] = useState('');
-  const [pash, setPash] = useState(false);
-  const [isNotFirst, setIsNotFirst] = useState(false);
+  const [pash, setPash] = useState(true);
 
   useEffect(() => {
     const saveStep = JSON.parse(localStorage.getItem('step'));
@@ -15,27 +14,17 @@ function App() {
     const saveName = JSON.parse(localStorage.getItem('name'));
     const savePash = JSON.parse(localStorage.getItem('pash'));
 
+    console.log(savePash === 1 ? true : false);
     if (saveStep) setStep(saveStep);
     if (saveClick) setCounter(saveClick);
     if (saveName) setName(saveName);
-    if (savePash) setPash(savePash);
+    if (savePash === false) setPash(false);
   }, []);
-
-  useEffect(() => {
-    setIsNotFirst(true);
-  }, []);
-
-  useEffect(() => {
-    if (counter > 50000 && pash && isNotFirst) {
-      alert(`Fuu#k, you could! Could! You're my star now 🤩`);
-      setPash(false);
-      localStorage.setItem('pash', JSON.stringify(false));
-    }
-  }, [counter]);
 
   const clickCounter = () => {
     setCounter((counter) => counter + step);
     localStorage.setItem('click', JSON.stringify(counter + step));
+    checkPash();
   };
 
   const buyFirstMouse = () => {
@@ -56,6 +45,7 @@ function App() {
       () =>
         setCounter((counter) => {
           localStorage.setItem('click', JSON.stringify(counter + 10));
+          checkPash();
           return counter + 10;
         }),
       1000
@@ -72,6 +62,14 @@ function App() {
     localStorage.setItem('name', JSON.stringify(newName));
   };
 
+  const checkPash = () => {
+    if (counter > 50000 && pash) {
+      alert(`Fuu#k, you could! Could! You're my star now 🤩`);
+      setPash(false);
+      localStorage.setItem('pash', JSON.stringify(false));
+    }
+  };
+
   return (
     <main>
       <header>
@@ -82,7 +80,7 @@ function App() {
         {name !== '' ? (
           <h2>{`Hey, ${name}!`}</h2>
         ) : (
-          <button type="submit" onClick={saveName}>
+          <button className="header__btnName" type="submit" onClick={saveName}>
             Give name
           </button>
         )}

@@ -15,6 +15,21 @@ main {
   margin: 20px 0 0 0;
 }
 
+.header__btnName {
+  margin: 10px auto 0 auto;
+  height: 30px;
+  width: 80px;
+  background: none;
+  border: 1px solid grey;
+  border-radius: 3px;
+  display: block;
+}
+
+.header__btnName:hover {
+  cursor: pointer;
+  background-color: greenyellow;
+}
+
 .game {
   display: flex;
   align-items: center;
